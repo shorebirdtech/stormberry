@@ -11,7 +11,6 @@ class SchemaBuilder extends OutputBuilder {
   @override
   String buildTarget(BuildStep buildStep, AssetState asset) {
     return '''
-      // dart format off
       // ignore_for_file: annotate_overrides
       // Generated file, do not edit.
 

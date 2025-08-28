@@ -37,7 +37,6 @@ class ViewQuery<Result> implements Query<List<Result>, QueryParams> {
 
   @override
   Future<List<Result>> apply(Session db, QueryParams params) async {
-    var time = DateTime.now();
     var res = await db.execute(Sql.named("""
       SELECT * FROM (${queryable.query}) "${queryable.tableAlias}"
       ${params.where != null ? "WHERE ${params.where}" : ""}
@@ -49,8 +48,6 @@ class ViewQuery<Result> implements Query<List<Result>, QueryParams> {
     var results = res
         .map((row) => queryable.decode(TypedMap(row.toColumnMap())))
         .toList();
-    print(
-        'Queried ${results.length} rows in ${DateTime.now().difference(time)}');
     return results;
   }
 }
